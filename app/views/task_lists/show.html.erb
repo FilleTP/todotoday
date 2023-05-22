@@ -1,5 +1,8 @@
-<% @task_list.tasks.each do |task| %>
-  <%= task.name %>
-  <%= task.description %>
+<div id="tasks">
+  <%= render 'tasks/form', task: @task %>
+  <% @task_list.tasks.each do |task| %>
+    <%= render 'tasks/task', task: task %>
+  <% end %>
+</div>
 
-<% end %>
+<%= render 'invitations/form',  invitation: @invitation %>

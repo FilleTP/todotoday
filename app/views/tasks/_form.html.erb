@@ -1,0 +1,7 @@
+<h1>ADD NEW TASK</h1>
+  <%= simple_form_for [@task_list, @task], remote: true, id: 'new_task' do |f| %>
+    <%= f.input :task_category_id, collection: TaskCategory.all %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.button :submit %>
+  <% end %>

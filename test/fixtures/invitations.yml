@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inviter: one
+  invitee: one
+  task_list: one
+
+two:
+  inviter: two
+  invitee: two
+  task_list: two

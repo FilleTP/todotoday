@@ -7,6 +7,9 @@ class TaskListsController < ApplicationController
 
   def show
     @task_list = TaskList.find(params[:id])
+    @task = Task.new
+    @invitation = Invitation.new
+    @profiles = Profile.all.where.not(id: current_user.profile.id)
   end
 
   def create

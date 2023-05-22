@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show], param: :nickname
   resources :task_lists, only: [:index, :create, :show] do
     resources :tasks, only: [:create, :update, :destroy]
+    resources :invitations, only: [:create]
   end
 end
