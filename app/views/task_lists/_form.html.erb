@@ -1,7 +1,7 @@
 <%= simple_form_for @task_list, data: { controller: 'task-fields' } do |f| %>
   <%= f.input :points, as: :select, collection: 1..10 %>
   <div data-task-fields-target='container'>
-    <%= f.simple_fields_for :tasks, Task.new, child_index: 'NEW_RECORD' do  |task_form| %>
+    <%= f.simple_fields_for :tasks, child_index: 0 do  |task_form| %>
       <%= render 'task_fields', f: task_form %>
     <% end %>
   </div>

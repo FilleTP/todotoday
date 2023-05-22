@@ -2,13 +2,14 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ['fields', 'container', 'removeButton']
+  // counter = 1
 
   connect() {
     this.#updateRemoveButton()
   }
 
   add(event) {
-    let content = this.fieldsTarget.outerHTML.replace(/NEW_RECORD/g, new Date().getTime())
+    let content = this.fieldsTarget.outerHTML.replace(/0/g, new Date().getTime())
     this.containerTarget.insertAdjacentHTML('beforeend', content)
     this.#updateRemoveButton()
   }

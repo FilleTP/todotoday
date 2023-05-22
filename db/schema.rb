@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_064940) do
     t.float "points"
     t.boolean "completed", default: false
     t.bigint "task_list_id", null: false
-    t.bigint "task_category_id", null: false
+    t.bigint "task_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_category_id"], name: "index_tasks_on_task_category_id"

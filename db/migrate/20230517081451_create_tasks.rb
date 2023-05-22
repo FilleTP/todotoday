@@ -7,7 +7,7 @@ class CreateTasks < ActiveRecord::Migration[7.0]
       t.float :points
       t.boolean :completed, default: false
       t.references :task_list, null: false, foreign_key: true
-      t.references :task_category, null: false, foreign_key: true
+      t.references :task_category, null: true, foreign_key: true
 
       t.timestamps
     end
