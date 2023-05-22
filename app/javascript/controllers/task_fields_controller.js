@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ['fields', 'container', 'removeButton']
-  // counter = 1
 
   connect() {
     this.#updateRemoveButton()

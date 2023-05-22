@@ -1,20 +1,28 @@
 class TaskListsController < ApplicationController
+
   def index
-    @task_list = TaskList.new
-    @task_list.tasks.build
+    @task_list = current_user.profile.task_lists.build
+    @task_lists = TaskList.all.where(profile: current_user.profile)
+  end
+
+  def show
+    @task_list = TaskList.find(params[:id])
   end
 
   def create
-    @task_list = TaskList.new(task_list_params)
-    @task_list.profile = current_user.profile
-
-    @task_list.save!
-    raise
+    @task_list = current_user.profile.task_lists.build(task_list_params)
+    if @task_list.save
+      redirect_to task_list_path(@task_list)
+    else
+      render :new
+    end
   end
+
+  def destroy; end
 
   private
 
   def task_list_params
-    params.require(:task_list).permit(:points, :profile_id, tasks_attributes: [:id, :name, :description, :_destroy, :task_category_id])
+    params.require(:task_list).permit(:name)
   end
 end

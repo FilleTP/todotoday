@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_21_064940) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_22_152442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_064940) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "profile_task_lists", force: :cascade do |t|
+    t.bigint "profile_id", null: false
+    t.bigint "task_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_profile_task_lists_on_profile_id"
+    t.index ["task_list_id"], name: "index_profile_task_lists_on_task_list_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -42,21 +51,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_064940) do
   end
 
   create_table "task_lists", force: :cascade do |t|
-    t.integer "points"
-    t.bigint "profile_id", null: false
+    t.string "name"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["profile_id"], name: "index_task_lists_on_profile_id"
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "description"
     t.string "name"
-    t.integer "priority", default: 0
-    t.float "points"
+    t.string "description"
     t.boolean "completed", default: false
+    t.integer "priority", default: 0
+    t.integer "points", default: 10
     t.bigint "task_list_id", null: false
-    t.bigint "task_category_id"
+    t.bigint "task_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_category_id"], name: "index_tasks_on_task_category_id"
@@ -75,9 +83,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_21_064940) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "profile_task_lists", "profiles"
+  add_foreign_key "profile_task_lists", "task_lists"
   add_foreign_key "profiles", "levels"
   add_foreign_key "profiles", "users"
-  add_foreign_key "task_lists", "profiles"
   add_foreign_key "tasks", "task_categories"
   add_foreign_key "tasks", "task_lists"
 end

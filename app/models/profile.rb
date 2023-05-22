@@ -1,7 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :level
-  has_many :task_lists
+  has_many :profile_task_lists
+  has_many :task_lists, through: :profile_task_lists
   validates :nickname, presence: true, uniqueness: true
   before_validation :add_level, on: :create
 
