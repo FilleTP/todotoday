@@ -1,12 +1,20 @@
 class TaskListsController < ApplicationController
-  def show
+  def index
     @task_list = TaskList.new
-    @task = Task.new
+    @task_list.tasks.build
   end
 
   def create
     @task_list = TaskList.new(task_list_params)
     @task_list.profile = current_user.profile
-    # send task list to partial, insert with JS
+
+    @task_list.save!
+    raise
+  end
+
+  private
+
+  def task_list_params
+    params.require(:task_list).permit(:points, :profile_id, tasks_attributes: [:id, :name, :description, :_destroy, :task_category_id])
   end
 end

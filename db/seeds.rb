@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Level.create(name: "one", description: "This is the first level", min_points: 0)
+
+TaskCategory.create(name: "Work", description: "The work category")
+TaskCategory.create(name: "Exercise", description: "The work category")
+TaskCategory.create(name: "Chores", description: "The work category")
