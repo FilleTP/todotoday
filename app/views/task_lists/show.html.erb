@@ -1,3 +1,7 @@
+<h1>Task List</h1>
+<% @task_list.profiles.each do |profile| %>
+  <p><%= profile.nickname %></p>
+<% end %>
 <div id="tasks">
   <%= render 'tasks/form', task: @task %>
   <% @task_list.tasks.each do |task| %>

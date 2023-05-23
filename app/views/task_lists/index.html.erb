@@ -1,1 +1,7 @@
+<h1>Task Lists</h1>
 <%= render 'form' %>
+
+<h2>My Lists</h2>
+<% @task_lists.each do |list| %>
+  <%= render 'task_list', task_list: list %>
+<% end %>

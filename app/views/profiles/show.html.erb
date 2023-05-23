@@ -1,0 +1,16 @@
+<h1>Profile</h1>
+<%= @profile.nickname %>
+<h2>You have received these invites:</h2>
+<% @received_invitations.each do |received| %>
+  <p>Task List name: <%= received.task_list.name %></p>
+  <p>You are invited by: <%= received.inviter.nickname %></p>
+  <%= link_to "Accept", accept_task_list_invitation_path(received.task_list, received, received.token) %>
+  <%= link_to "Decline", decline_task_list_invitation_path(received.task_list, received, received.token) %>
+<% end %>
+<h2>You have sent these invites:</h2>
+<% @sent_invitations.each do |sent| %>
+  <p>Task List name: <%= sent.task_list.name %></p>
+  <p>You invited: <%= sent.invitee.nickname %></p>
+<% end %>
+
+<% raise %>
