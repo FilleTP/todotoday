@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
         render_to_string(partial: "message", locals: {message: @message})
       )
       head :ok
+      # hello
     else
       render "task_list/show/#{params[:task_list_id]}"
     end
