@@ -6,12 +6,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag 'rails-ujs' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
     <% if user_signed_in? %>
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+      <div style="display:flex; justify-content:space-between;">
+        <%= link_to "Home", root_path %>
+        <%= link_to "My Profile", profile_path(current_user.profile.nickname) %>
+        <%= link_to "Task Lists", task_lists_path %>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+      </div>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>
     <% end %>
