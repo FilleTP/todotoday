@@ -1,7 +1,6 @@
 class InvitationsController < ApplicationController
 
   def create
-    raise
     @invitation = Invitation.new(invitation_params)
     @invitation.inviter = current_user.profile
     @invitation.task_list = TaskList.find(params[:task_list_id])

@@ -5,6 +5,7 @@ class Profile < ApplicationRecord
   has_many :task_lists, through: :profile_task_lists
   has_many :invitations_sent, foreign_key: 'inviter_id', class_name: 'Invitation'
   has_many :invitations_received, foreign_key: 'invitee_id', class_name: 'Invitation'
+  has_many :messages
   validates :nickname, presence: true, uniqueness: true
   before_validation :add_level, on: :create
 

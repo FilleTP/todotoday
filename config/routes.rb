@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show], param: :nickname
   resources :task_lists, only: [:index, :create, :show] do
     resources :tasks, only: [:create, :update, :destroy]
+    resources :chatrooms do
+      resources :messages, only: :create
+    end
     resources :invitations, only: [:create] do
       member do
         get 'accept/:token', action: 'accept', as: 'accept'

@@ -8,6 +8,8 @@ class TaskListsController < ApplicationController
 
   def show
     @task_list = TaskList.find(params[:id])
+    @chatroom = Chatroom.find_by(task_list: @task_list) || Chatroom.create(task_list: @task_list)
+    @message = Message.new
     @task = Task.new
     @invitation = Invitation.new
     @profiles = Profile.all.where.not(id: current_user.profile.id)

@@ -4,10 +4,14 @@ class TasksController < ApplicationController
     @task_list = TaskList.find(params[:task_list_id])
     @task = @task_list.tasks.build(task_params)
     if @task.save
-      respond_to do |format|
-        format.html { redirect_to task_list_path(@task_list) }
-        format.js { render 'create', locals: { task: @task } }
-      end
+      TaskListChannel.broadcast_to(
+        @task_list,
+        render_to_string(partial: "task", locals: { task: @task })
+      )
+      # respond_to do |format|
+      #   format.html { redirect_to task_list_path(@task_list) }
+      #   format.js { render 'create', locals: { task: @task } }
+      # end
     else
       respond_to do |format|
         format.html { render :new }

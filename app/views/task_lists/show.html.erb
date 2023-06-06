@@ -4,9 +4,37 @@
 <% end %>
 <div id="tasks">
   <%= render 'tasks/form', task: @task %>
-  <% @task_list.tasks.each do |task| %>
-    <%= render 'tasks/task', task: task %>
-  <% end %>
+  <div class="container tasklist"
+  data-controller="task-list-subscription"
+  data-task-list-subscription-task-list-id-value="<%= @task_list.id %>">
+    <div data-task-list-subscription-target="tasks">
+    <% @task_list.tasks.each do |task| %>
+      <%= render 'tasks/task', task: task %>
+    <% end %>
+    </div>
+  </div>
 </div>
 
 <%= render 'invitations/form',  invitation: @invitation %>
+
+<%= simple_form_for [@task_list, @chatroom, @message],
+  html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, remote: true, class: "d-flex" } do |f|
+%>
+  <%= f.input :content %>
+  <%= f.button :submit %>
+<% end %>
+
+<div class="container chatroom"
+  data-controller="chatroom-subscription"
+  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+>
+  <h1>#<%= @chatroom.id %></h1>
+
+  <div class="messages" data-chatroom-subscription-target="messages">
+
+    <% @chatroom.messages.each do |message| %>
+      <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
+
+</div>
